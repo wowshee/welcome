@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ButtonAnimation</title>
+    <style>
+        * {
+            margin: auto;
+            padding: 0;
+        }
+
+        button {
+            font-size: 2em;
+            background-color: cornflowerblue;
+            color: #fff;
+            border: 0.25rem solid darkslateblue;
+            padding: 0.85em 0.75em;
+            margin: 1rem;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        /*z-index로 contents와 background 분리하여
+        배경에 -1을 주고 원래 버튼에 1을 주어 변경된 색상의 글은
+        위에 보이도록*/
+        button:hover{
+           color: cornflowerblue;
+        }
+        button:before{
+            content: '';
+            background-color: #ecf0f1;
+            position: absolute;
+            padding: 0.85em 0.75em;
+            z-index: -1;
+        }
+        .slide_from_left:before{
+            left: -100%; right: 100%; top:0; bottom: 0;
+        }
+        .slide_from_right:before{
+            left: 100%; right: -100%; top:0; bottom: 0;
+        }
+        .slide_from_top:before{
+            left: 0; right: 0; top:-100%; bottom: 100%;
+        }
+        .slide_from_bottom:before{
+            left: 0; right: 0; top:100%; bottom: -100%;
+        }
+        button[class^="slide"]:before{
+        transition: 0.35s;       
+        }
+        button[class^="slide"]:hover:before {
+            left: 0; right: 0; top: 0; bottom: 0;
+        }
+
+        .grow_box::before{
+            left: 0; right: 0; top: 0; bottom: 0;
+            transform: scale(0);
+            transition: 0.35s;
+        }
+        .grow_box:hover:before{
+            left: 0; right: 0; top: 0; bottom: 0;
+            transform: scale(1);
+        }
+        .grow_ellipse::before{
+            left: -50%; right: -50%; top: -50%; bottom: -50%;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 0.35s;
+        }
+        .grow_ellipse:hover:before{
+            transform: scale(1);
+        }
+        .grow_skew_forward::before{
+            left: -20%; right: -20%; top: 0; bottom: 0;
+            transform: skewX(-45deg) scaleX(0);
+            transition: 0.35s;
+        }
+        .grow_skew_forward:hover:before{
+            transform: skewX(-45deg) scaleX(1);
+        }
+        .grow_skew_backward::before{
+            left: -20%; right: -20%; top: 0; bottom: 0;
+            transform: skewX(45deg) scaleX(0);
+            transition: 0.35s;
+        }
+        .grow_skew_backward:hover:before{
+            transform: skewX(45deg) scaleX(1);
+        }
+        .grow_spin::before{
+            left: 0; right: 0; top: 0; bottom: 0;
+            transform: scale(0) rotate(-180deg);
+            transition: 0.35s;
+        }
+        .grow_spin:hover:before{
+            transform: scaleX(1) rotate(0deg);
+        }
+        
+        button[class^="grow"]{
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <button class="slide_from_left">SLIDE FROME LEFT</button>
+        <button class="slide_from_right">SLIDE FROME RIGHT</button>
+        <button class="slide_from_top">SLIDE FROME TOP</button>
+        <button class="slide_from_bottom">SLIDE FROME BOTTOM</button>
+        <hr />
+        <button class="grow_box">GROW BOX</button>
+        <button class="grow_ellipse">GROW ELLIPSE</button>
+        <button class="grow_skew_forward">GROW SKEW FORWARD</button>
+        <button class="grow_skew_backward">GROW SKEW BACKWARD</button>
+        <button class="grow_spin">GROW SPIN</button>
+    </div>
+</body>
+
+</html>
